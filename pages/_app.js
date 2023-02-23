@@ -11,6 +11,8 @@ export default function App({ Component, pageProps }) {
       if(localStorage.getItem("cart"))
     { 
      setCart(JSON.parse(localStorage.getItem("cart")))
+     saveCard(JSON.parse(localStorage.getItem("cart"))); 
+     //cart madhe page refresh kel ki rs he 0 yet ahe tyamule localstorage madhun cart la ghevun cart la save kel
     }
   
       
@@ -18,7 +20,6 @@ export default function App({ Component, pageProps }) {
       console.log(error);
       localStorage.clear()
     }
-    
   }, [])
 
   const saveCard = (myCart)=>{
@@ -72,7 +73,7 @@ export default function App({ Component, pageProps }) {
 
  
   return <> 
-  <Navbar cart = {cart} addToCart ={addToCart} removeFromCart = {removeFromCart} clearCart ={clearCart} subTotal ={subTotal} />
+  <Navbar key={subTotal} cart = {cart} addToCart ={addToCart} removeFromCart = {removeFromCart} clearCart ={clearCart} subTotal ={subTotal} />
    <Component cart = {cart} addToCart ={addToCart} removeFromCart = {removeFromCart} clearCart ={clearCart} subTotal ={subTotal} {...pageProps} />
    <Footer/>
    </>
