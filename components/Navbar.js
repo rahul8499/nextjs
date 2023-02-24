@@ -9,6 +9,9 @@ import {
 } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
 
+import { MdAccountCircle } from "react-icons/md";
+
+
 const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   // { cart ,addToCart, clearCart ,removeFromCart, subTotal }
   const toggleCart = () => {
@@ -47,18 +50,22 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
             </Link>
           </ol>
         </div>
-        <div
-          onClick={toggleCart}
-          className=" cursor-pointer cart absolute right-0 mx-5 top-2 "
-        >
-          <AiOutlineShoppingCart className="text-3xl" />
+        <div className=" cursor-pointer cart absolute right-0 mx-5 top-2 flex ">
+          <Link href={"/login"}>
+            <MdAccountCircle className="text-3xl mx-2" />
+          </Link>
+          <AiOutlineShoppingCart onClick={toggleCart} className="text-3xl" />
         </div>
 
-        {/* cart sidebar */}  
+        {/* cart sidebar */}
         <div
           ref={ref}
-          className={` w-72 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8  transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0': 'translate-x-full'} `}
-        //   cart rs 0 asel tr cart open rahnar nahi cart madhe rs astil tr cart open rahil
+          className={` w-72 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8  transition-transform ${
+            Object.keys(cart).length !== 0
+              ? "translate-x-0"
+              : "translate-x-full"
+          } `}
+          //   cart rs 0 asel tr cart open rahnar nahi cart madhe rs astil tr cart open rahil
         >
           <h2 className="font-bold texl-lg text-center mt-1">Shopping Cart</h2>
           <span
