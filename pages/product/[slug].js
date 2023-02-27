@@ -7,7 +7,8 @@ const Post = ({addToCart}) => {
   const [pin, setPin] = useState()
   const [ service , setService] = useState()
   const checkServiceavailability = async()=>{
-let pins  = await fetch( 'http://localhost:3000/api/pincode')
+let pins = await fetch("http://localhost:3000/api/pincode");
+// console.log(pins);
 let pinJson = await pins.json()
 // console.log(pinJson, pin);
 if(pinJson.includes(parseInt(pin)))
