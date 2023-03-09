@@ -13,8 +13,7 @@ import { MdAccountCircle } from "react-icons/md";
 
 
 const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
-  // { cart ,addToCart, clearCart ,removeFromCart, subTotal }
-  const toggleCart = () => {
+  const toggleCart = () => { // cart open or close code // close icon ani cart icon use one function
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
       ref.current.classList.add("translate-x-0");
@@ -54,16 +53,17 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
           <Link href={"/login"}>
             <MdAccountCircle className="text-3xl mx-2" />
           </Link>
-          <AiOutlineShoppingCart onClick={toggleCart} className="text-3xl" />
+          <AiOutlineShoppingCart onClick={toggleCart} className="text-3xl" />  
+
         </div>
 
         {/* cart sidebar */}
         <div
           ref={ref}
-          className={` w-72 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8  transition-transform ${
+          className={` w-80 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8  transition-transform ${ // cart length o asel tr open honar nahi automatic
             Object.keys(cart).length !== 0
-              ? "translate-x-0"
-              : "translate-x-full"
+              ?"translate-x-0" 
+              :"translate-x-full"
           } `}
           //   cart rs 0 asel tr cart open rahnar nahi cart madhe rs astil tr cart open rahil
         >
@@ -85,7 +85,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                   {/* k ha itemcode ahe */}
 
                   <div className="item flex my-8 ">
-                    <span className="w-2/3 font-semibold">{cart[k].name}</span>
+                    <span className="w-2/3 font-semibold">{cart[k].name}({cart[k].size}/{cart[k].variant})</span>
                     <span className="flex items-center justify-center font-semibold 1/3 texl-lg">
                       <AiFillMinusCircle
                         onClick={() => {
