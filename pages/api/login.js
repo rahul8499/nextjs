@@ -1,6 +1,7 @@
 import User from "@/models/User";
 import connectDb from "@/middleware/mongoose";
 var CryptoJS = require("crypto-js");
+var jwt = require("jsonwebtoken");
 
 const handler = async (req, res) => {
   if (req.method == "POST") {
@@ -13,10 +14,14 @@ let  decryptPaassword = bytes.toString(CryptoJS.enc.Utf8); // byte la string mad
       if (
         req.body.email == user.email &&
         req.body.password == decryptPaassword      ) {
+          var token = jwt.sign(
+            { email: user.email, name: user.name },
+            "jwtsecrete",
+            { expiresIn: "2d" } // 2 day after wo logout ho jayega automatic login rahnar nahi
+          );
+
         // secrete he same key ne encrypt  kel user chya password la ani te match kel database madhlya passwor sobt
-        res
-          .status(200)
-          .json({ success: true, email: user.email, name: user.name });
+        res.status(200).json({ success: true, token });
       } else {
         res.status(200).json({
           success: false,

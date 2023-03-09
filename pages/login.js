@@ -27,7 +27,9 @@ const Login = () => {
             autoClose: 5000,
           });
 
-          console.log("sucess");
+          // console.log("sucess");
+          // console.log(res.data.token);
+          localStorage.setItem('token', res.data.token)
           setTimeout(() => {
             router.push("/");
           }, 2000);
