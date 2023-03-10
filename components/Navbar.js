@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,7 +12,9 @@ import { BsFillBagCheckFill } from "react-icons/bs";
 import { MdAccountCircle } from "react-icons/md";
 
 
-const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+const Navbar = ({logout, user,  cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+  const[dropdown, setDropdown] = useState(false)
+
   const toggleCart = () => { // cart open or close code // close icon ani cart icon use one function
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
@@ -26,8 +28,8 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   const ref = useRef();
   return (
     <>
-      <div className="flex flex-col md:flex-row md:justify-start justify-center items-center shadow-md sticky top-0 bg-white z-10">
-        <div className="logo mx-5">
+      <div className="flex flex-col md:flex-row md:justify-start  justify-center items-center shadow-md sticky top-0 bg-white z-10">
+        <div className="logo mr-auto md:mx-5">
           <Link href={"/"}>
             {" "}
             <Image width={200} height={40} src="/logo.png" alt="" />{" "}
@@ -49,21 +51,57 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
             </Link>
           </ol>
         </div>
-        <div className=" cursor-pointer cart absolute right-0 mx-5 top-2 flex ">
-          <Link href={"/login"}>
-            <MdAccountCircle className="text-3xl mx-2" />
-          </Link>
-          <AiOutlineShoppingCart onClick={toggleCart} className="text-3xl" />  
+        <div className=" cursor-pointer cart items-center absolute right-0 mx-5 top-2 flex ">
+          <a
+            onMouseOver={() => {
+              setDropdown(true);
+            }}
+            onMouseLeave={() => {
+              setDropdown(false);
+            }}
+          >
+            {dropdown && (
+              <div className="absolute right-8 bg-pink-300 rounded-md py-4 px-5 w-32 top-7">
+                <ul>
+                  <li className="py-1 hover:text-pink-700 text-sm font-bold">
+                    MyAccount
+                  </li>
 
+                  <li className="py-1 hover:text-pink-700 text-sm font-bold">Orders</li>
+
+                  <li
+                    onClick={logout}
+                    className="py-1 hover:text-pink-700 text-sm font-bold"
+                  >
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            )}
+            {user.value && <MdAccountCircle className="text-3xl mx-2" />}
+          </a>
+          {/* 
+          token asel tr he icon mnje login kel asel tr he icon */}
+
+          {!user.value && (
+            <Link href={"/login"}>
+              <button className="bg-pink-600 px-2 py-1 rounded-md text-sm text-white mx-2">
+                Login
+              </button>
+              {/* token nasel tr he icon mnje login nsel tr he button */}
+            </Link>
+          )}
+          <AiOutlineShoppingCart onClick={toggleCart} className="text-3xl" />
         </div>
 
         {/* cart sidebar */}
         <div
           ref={ref}
-          className={` w-80 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8  transition-transform ${ // cart length o asel tr open honar nahi automatic
+          className={` w-80 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8  transition-transform ${
+            // cart length o asel tr open honar nahi automatic
             Object.keys(cart).length !== 0
-              ?"translate-x-0" 
-              :"translate-x-full"
+              ? "translate-x-0"
+              : "translate-x-full"
           } `}
           //   cart rs 0 asel tr cart open rahnar nahi cart madhe rs astil tr cart open rahil
         >
@@ -79,13 +117,16 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
             {Object.keys(cart).length == 0 && (
               <div className="my-4 font-semibold">Your Card is Empty!</div>
             )}
+
             {Object.keys(cart).map((k) => {
               return (
                 <li key={k}>
                   {/* k ha itemcode ahe */}
 
                   <div className="item flex my-8 ">
-                    <span className="w-2/3 font-semibold">{cart[k].name}({cart[k].size}/{cart[k].variant})</span>
+                    <span className="w-2/3 font-semibold">
+                      {cart[k].name}({cart[k].size}/{cart[k].variant})
+                    </span>
                     <span className="flex items-center justify-center font-semibold 1/3 texl-lg">
                       <AiFillMinusCircle
                         onClick={() => {
