@@ -1,9 +1,11 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify"; // react tostify
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URI } from "@/Base_url";
+
 const Login = () => {
   const router = useRouter();
   const handleChange = (e) => {
@@ -16,39 +18,42 @@ const Login = () => {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    await axios
-      .post(`http://localhost:3000/api/login`, postData)
-      .then((res) => {
-        if (res.data.success == true) {
-          toast("Sucess!", {
-            // react tostify
-            position: "top-left",
+    await axios.post(`${BASE_URI}/api/login`, postData).then((res) => {
+      if (res.data.success == true) {
+        toast("Sucess!", {
+          // react tostify
+          position: "top-left",
 
-            autoClose: 5000,
-          });
+          autoClose: 5000,
+        });
 
-          // console.log("sucess");
-          // console.log(res.data.token);
-          localStorage.setItem('token', res.data.token)
-          setTimeout(() => {
-            router.push("/");
-          }, 2000);
-        } else {
-          console.log(res.data.error);
-          toast(res.data.error, {
-            // react tostify
-            position: "top-left",
+        // console.log("sucess");
+        // console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      } else {
+        console.log(res.data.error);
+        toast(res.data.error, {
+          // react tostify
+          position: "top-left",
 
-            autoClose: 5000,
-          });
+          autoClose: 5000,
+        });
 
-          setTimeout(() => {
-            router.push("/login");
-          }, 2000);
-        }
-        console.log(res.data);
-      });
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
+      }
+      console.log(res.data);
+    });
   };
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      router.push('/')
+    }
+  }, [])
 
   return (
     <div>

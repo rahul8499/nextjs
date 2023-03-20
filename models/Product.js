@@ -23,5 +23,6 @@ const productSchema = new mongoose.Schema(
 export default mongoose.models.Product ||
   mongoose.model("Product", productSchema);
 
+
 // mongoose.models = {}; // cannot overwrite product model ha error solve jevha import hoyil punha bnvnyacha try krto tymule error yeto
 // export default mongoose.model("Product", productSchema); // productSchema ne Schema bnel table bnel ani ya table ch nav asel Order

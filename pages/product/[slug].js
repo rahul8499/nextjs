@@ -2,10 +2,11 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import mongoose from "mongoose";
 import Product from "@/models/Product";
+import { BASE_URI } from "@/Base_url";
 
 const Post = ({ buyNow, addToCart, product, varaint }) => {
-  console.log(product, varaint);
-  // console.log(
+  // console.log(product, varaint);
+  // console.log(product._id);
   //   Object.values(varaint).map((item) => {
   //     console.log(item);
   //   })
@@ -16,7 +17,7 @@ const Post = ({ buyNow, addToCart, product, varaint }) => {
   const [service, setService] = useState(); // user ne jo pin takla ahe to jar pin madhe asel tr true nahitr false he service state madhe store kele
 
   const checkServiceavailability = async () => {
-    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pins = await fetch(`${BASE_URI}/api/pincode`);
     let pinJson = await pins.json();
     // console.log(pinJson, pin);
     if (pinJson.includes(parseInt(pin))) {
@@ -33,12 +34,11 @@ const Post = ({ buyNow, addToCart, product, varaint }) => {
     // console.log(e.target.value);
   };
   const { slug } = router.query;
+  // console.log(slug);
   const [color, setColor] = useState(product.color);
   const [size, setSize] = useState(product.size);
   const refreshVaraint = (newSize, newColor) => {
-    let url = `http://localhost:3000/product/${
-      varaint[newColor][newSize][`slug`]
-    }`;
+    let url = `${BASE_URI}/product/${varaint[newColor][newSize][`slug`]}`;
     window.location = url;
   };
   return (
@@ -49,7 +49,7 @@ const Post = ({ buyNow, addToCart, product, varaint }) => {
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full lg:h-auto px-24 object-cover "
-              src= {product.img}
+              src={product.img}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -265,22 +265,27 @@ const Post = ({ buyNow, addToCart, product, varaint }) => {
                       1,
                       product.price,
                       product.title,
-                      product.color,
                       product.size,
+                      product.color
                     );
                   }}
                   className="flex ml-8 text-white bg-pink-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-pink-600 rounded"
                 >
                   Add to Cart
                 </button>
-                <button onClick={()=>{buyNow(
-                  slug,
-                  1,
-                  product.price,
-                  product.title,
-                  product.color,
-                  product.size
-                );}} className="flex ml-4 text-white bg-pink-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-pink-600 rounded">
+                <button
+                  onClick={() => {
+                    buyNow(
+                      slug,
+                      1,
+                      product.price,
+                      product.title,
+                      product.size,
+                      product.color
+                    );
+                  }}
+                  className="flex ml-4 text-white bg-pink-500 border-0 py-2 px-2 md:px-6 focus:outline-none hover:bg-pink-600 rounded"
+                >
                   Buy Now
                 </button>
                 {/* <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
@@ -339,7 +344,7 @@ export async function getServerSideProps(context) {
 
   let product = await Product.findOne({ slug: context.query.slug });
   let varaint = await Product.find({ title: product.title }); //Black: M: slug: "TshirtPink5"  he structure bnvl
-  ("TshirtPink5");
+  // ("TshirtPink5");
   let colorSizeSlug = {};
   for (let item of varaint) {
     if (Object.keys(colorSizeSlug).includes(item.color)) {

@@ -80,4 +80,4 @@ export default connectDb(handler);
 //   res.status(200).json({ product });
 // }
 
-// export default connectDb (handler)
+  // export default connectDb (handler)

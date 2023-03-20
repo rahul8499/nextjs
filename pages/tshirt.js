@@ -5,6 +5,7 @@ import Product from "@/models/Product";
 import mongoose from "mongoose";
 
 const Tshirt = ({ product }) => {
+  // console.log(product);
   return (
     <div>
       <section className="text-gray-600 body-font">
@@ -105,7 +106,7 @@ const Tshirt = ({ product }) => {
 };
 
 //-----------serverSideProps-------------
-// 1]mongoose ch connection ghetl getserverSideProps madhe 
+// 1]mongoose ch connection ghetl getserverSideProps madhe
 // 2]logic write kel jya item ch title same ahe ani tyamdhe diffrent size, diffrent color ahe te common hotil mnje ek product che kiti size ani kiti color available ahe te show hotil new product add kela database madhe tyach title same asel tr tye product ch size ani color ani size add keli jayil tya item madhe mnje eka item che kiti color ani size ahe te show hotil
 
 export async function getServerSideProps(context) {
@@ -115,6 +116,7 @@ export async function getServerSideProps(context) {
   }
 
   let product = await Product.find({ category: "tshirt" }); //product table madhun category: tshirt asel tech get hotil karan product ya tabel madhe khup sare product mnje item astil jyanchi category tshirt asel tech get hotil
+  // console.log(product);
   let tshirts = {};
   for (let item of product) {
     if (item.title in tshirts) {

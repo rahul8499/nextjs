@@ -1,9 +1,11 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation"; //navigate sathi
 import { ToastContainer, toast } from "react-toastify"; // react tostify
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URI } from "@/Base_url";
+  
 
 // npm i next-navigation
 const signup = () => {
@@ -12,6 +14,7 @@ const signup = () => {
     e.target.value;
   };
   const handleSubmit = async (e) => {
+  
     e.preventDefault(); // form submit jalyavr page reload nahi honar
     const postData = {
       //post data
@@ -19,7 +22,10 @@ const signup = () => {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    await axios.post(`http://localhost:3000/api/signup`, postData);
+    await axios.post(`${BASE_URI}/api/signup`, postData);
+        // await axios.post("http://localhost:3000/api/signup", postData);
+
+
 
     toast("Sucess!", {
       // react tostify
@@ -35,6 +41,11 @@ const signup = () => {
     // console.log(e.target.email.value);
     // console.log(e.target.password.value);
   };
+   useEffect(()=>{
+    if(localStorage.getItem('token')){
+      router.push('/')
+    }
+  }, [])
 
   return (
     <div>

@@ -61,14 +61,20 @@ const Navbar = ({logout, user,  cart, addToCart, removeFromCart, clearCart, subT
             }}
           >
             {dropdown && (
-              <div className="absolute right-8 bg-pink-300 rounded-md py-4 px-5 w-32 top-7">
+              <div className="absolute right-8 bg-white rounded-md py-4 px-5 w-32 top-7 shadow-lg border">
                 <ul>
-                  <li className="py-1 hover:text-pink-700 text-sm font-bold">
-                    MyAccount
-                  </li>
-
-                  <li className="py-1 hover:text-pink-700 text-sm font-bold">Orders</li>
-
+                  <Link href={"/myaccount"}>
+                    {" "}
+                    <li className="py-1 hover:text-pink-700 text-sm font-bold">
+                      MyAccount
+                    </li>
+                  </Link>
+                  <Link href={"/orders"}>
+                    {" "}
+                    <li className="py-1 hover:text-pink-700 text-sm font-bold">
+                      Orders
+                    </li>
+                  </Link>
                   <li
                     onClick={logout}
                     className="py-1 hover:text-pink-700 text-sm font-bold"
