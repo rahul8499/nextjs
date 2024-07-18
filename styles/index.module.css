@@ -1,0 +1,36 @@
+.section {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out;
+}
+
+.leftToRight {
+  transform: translateX(0);
+}
+
+
+.itNeedsLeftToRight {
+  transform: translateX(-100%);
+}
+
+.itNeedsRightToLeft {
+  transform: translateX(100%);
+}
+/* CSS for slide-in transformation */
+.cardTransion {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+
+.cardLeftToRight {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+.cardRightToLeft {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}

@@ -1,191 +1,300 @@
-import React, { useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  AiOutlineShoppingCart,
-  AiFillCloseCircle,
-  AiFillPlusCircle,
-  AiFillMinusCircle,
-} from "react-icons/ai";
-import { BsFillBagCheckFill } from "react-icons/bs";
 
-import { MdAccountCircle } from "react-icons/md";
+// import { useState } from 'react';
+// import { useRouter } from 'next/router';
+// import Link from 'next/link';
+// import { FaBars, FaTimes } from 'react-icons/fa';
 
+// const Navbar = () => {
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const router = useRouter();
 
-const Navbar = ({logout, user,  cart, addToCart, removeFromCart, clearCart, subTotal }) => {
-  const[dropdown, setDropdown] = useState(false)
+//   const toggleMenu = () => {
+//     setMenuOpen(!menuOpen);
+//   };
 
-  const toggleCart = () => { // cart open or close code // close icon ani cart icon use one function
-    if (ref.current.classList.contains("translate-x-full")) {
-      ref.current.classList.remove("translate-x-full");
-      ref.current.classList.add("translate-x-0");
-    } else if (!ref.current.classList.contains("translate-x-full")) {
-      ref.current.classList.remove("translate-x-0");
-      ref.current.classList.add("translate-x-full");
+//   const navItems = [
+//     { name: 'Home', path: '/' },
+//     { name: 'Services', path: '/Services' },
+//     { name: 'Internship', path: '/Internship' },
+//     { name: 'Portfolio', path: '/Portfolio' },
+//     { name: 'Career', path: '/Career' },
+//     { name: 'About', path: '/About' },
+//     { name: 'Blogs', path: '/Blogs' },
+//     { name: 'Contact', path: '/Contact', isSpecial: true },
+//   ];
+
+//   return (
+//     <div>
+//       <div className="flex flex-col md:flex-row md:justify-between items-center shadow-lg sticky top-0 bg-white z-10 py-4 px-6">
+//         <div className="flex justify-between items-center w-full md:w-auto">
+//           <div className="logo mr-auto md:mx-5">
+//             <Link href="/">
+//               <span className="text-red-800 font-serif font-extrabold text-lg">RK</span>
+//             </Link>
+//           </div>
+//           <button
+//             className="md:hidden flex items-center px-3 py-2 border rounded text-gray-800 border-gray-400"
+//             onClick={toggleMenu}
+//           >
+//             <FaBars size={24} />
+//           </button>
+//         </div>
+//         <div className="hidden md:flex w-full md:w-auto md:ml-auto">
+//           <ol className="flex flex-col md:flex-row justify-end items-center space-y-2 md:space-y-0 md:space-x-8 text-lg font-serif">
+//             {navItems.map((item) => (
+//               <li
+//                 key={item.name}
+//                 className={`relative group ${
+//                   router.pathname === item.path ? 'text-red-800' : 'text-gray-800'
+//                 } ${item.isSpecial ? 'bg-red-700 p-1 ' : ''}`}
+//               >
+//                 <Link
+//                   href={item.path}
+//                   className={` transition-colors duration-300 ${
+//                     item.isSpecial ? 'hover:text-white text-white p-2' : 'hover:text-red-800'
+//                   }`}
+//                 >
+//                   {item.name}
+//                 </Link>
+//                 {router.pathname === item.path && (
+//                   <span className="absolute left-0 -bottom-1 w-full h-1 bg-red-500 transition-all duration-300"></span>
+//                 )}
+//               </li>
+//             ))}
+//           </ol>
+//         </div>
+//       </div>
+
+//       <div
+//         className={`fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out ${
+//           menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+//         }`}
+//         onClick={toggleMenu}
+//       ></div>
+
+//       <div
+//         className={`fixed top-0 left-0 z-50 w-full h-full bg-white shadow-md transform ${
+//           menuOpen ? 'translate-x-0' : '-translate-x-full'
+//         } transition-transform duration-300 ease-in-out`}
+//       >
+//         <button
+//           onClick={toggleMenu}
+//           className="absolute top-4 right-4 p-2 bg-gray-200 rounded-full"
+//         >
+//           <FaTimes size={24} />
+//         </button>
+//         <div className="p-4">
+//           <h2 className="text-xl font-bold">RK GROUP OF IT SOLUTION</h2>
+//           <ol className="flex flex-col space-y-4 mt-4  text-lg font-serif">
+//             {navItems.map((item) => (
+//               <li
+//                 key={item.name}
+//                 className={`relative group ${
+//                   router.pathname === item.path ? 'text-red-800' : 'text-gray-800'
+//                 } ${item.isSpecial ? 'bg-red-700 p-1 ' : ''}`}
+//               >
+//                 <Link
+//                   href={item.path}
+//                   className={` transition-colors duration-300 ${
+//                     item.isSpecial ? 'hover:text-white text-white p-2' : 'hover:text-red-800'
+//                   }`}
+//                   onClick={toggleMenu}
+//                 >
+//                   {item.name}
+//                 </Link>
+//                 {router.pathname === item.path && (
+//                   <span className="absolute left-0 -bottom-1 w-full h-1 bg-red-500 transition-all duration-300"></span>
+//                 )}
+//               </li>
+//             ))}
+//           </ol>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Navbar;
+// components/Navbar.js
+// import React, { useState, useEffect } from 'react';
+// import Link from 'next/link';
+
+// const Navbar = () => {
+//   const [navbarBackground, setNavbarBackground] = useState(false);
+
+//   const handleScroll = () => {
+//     if (window.scrollY > 50) {
+//       setNavbarBackground(true);
+//     } else {
+//       setNavbarBackground(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     window.addEventListener('scroll', handleScroll);
+//     return () => {
+//       window.removeEventListener('scroll', handleScroll);
+//     };
+//   }, []);
+
+//   return (
+//     <nav className={`fixed w-full z-10 top-0 transition-all duration-300 ${navbarBackground ? 'bg-white shadow-lg' : 'bg-transparent text-white'}`}>
+//       <div className="container mx-auto flex justify-between items-center p-4">
+//         <Link href="/" >
+//         RK Group of IT Solutions
+//         </Link>
+//         <div className="space-x-4">
+//           <Link href="/">
+//           Home
+//           </Link>
+//           <Link href="/About">
+//           About
+//           </Link>
+//           <Link href="/services">
+//           Services
+//           </Link>
+//           <Link href="/contact">
+//           Contact
+//           </Link>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [navbarBackground, setNavbarBackground] = useState(false);
+  // const router = useRouter();
+
+  // const handleScroll = () => {
+  //   if (window.scrollY > 50) {
+  //     setNavbarBackground(true);
+  //   } else {
+  //     setNavbarBackground(false);
+  //   }
+  // };
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const router = useRouter();
+
+  const handleScroll = () => {
+    setScrollPosition(window.scrollY);
+    if (window.scrollY > 50) {
+      setNavbarBackground(true);
+    } else {
+      setNavbarBackground(false);
     }
   };
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  const ref = useRef();
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/Services'  },
+    { name: 'Internship', path: '/Internship' },
+    { name: 'Portfolio', path: '/Portfolio' },
+    { name: 'Career', path: '/Career' },
+    { name: 'About', path: '/About' },
+    { name: 'Blogs', path: '/Blogs' },
+    { name: 'Contact', path: '/Contact', isSpecial: true },
+  ];
+    // const imageSrc = scrollPosition > 50
+    // ? '/vector1.jpg'
+    // : (router.pathname === '/'
+    //     ? '/logo.png'
+    //     : '/vector1.jpg');
+
+  const textColor = scrollPosition > 50 ? 'text-black' : (router.pathname === '/' ? 'text-white' : 'text-black');
   return (
-    <>
-      <div className="flex flex-col md:flex-row md:justify-start  justify-center items-center shadow-md sticky top-0 bg-white z-10">
-        <div className="logo mr-auto md:mx-5">
-          <Link href={"/"}>
-            {" "}
-            <Image width={200} height={40} src="/logo.png" alt="" />{" "}
+    <div>
+      <nav className={`fixed w-full z-20 top-0 transition-all duration-300 ${navbarBackground ? 'bg-white shadow-lg' : 'bg-transparent '}`}>
+        <div className="container mx-auto flex justify-between items-center p-4">
+          <Link href="/">
+          {/* <img src={imageSrc} alt="Logo" width={130} height={50}  /> */}
+
+
+
+            <span className= {` font-serif font-extrabold text-lg ${textColor}`}>RKGROUPOFITSOLUTIONS</span>
           </Link>
-        </div>
-        <div className="nav ">
-          <ol className="flex justify-between items-center space-x-6 font-bold md:text-md cursor-pointer">
-            <Link href={"/tshirt"}>
-              <li>Tshirt</li>
-            </Link>
-            <Link href={"/hoodies"}>
-              <li>Hoddies</li>
-            </Link>
-            <Link href={"/stickers"}>
-              <li>stickers</li>
-            </Link>
-            <Link href={"/mugs"}>
-              <li>mugs</li>
-            </Link>
-          </ol>
-        </div>
-        <div className=" cursor-pointer cart items-center absolute right-0 mx-5 top-2 flex ">
-          <a
-            onMouseOver={() => {
-              setDropdown(true);
-            }}
-            onMouseLeave={() => {
-              setDropdown(false);
-            }}
+          <button
+            className="md:hidden flex items-center px-3 py-2 border rounded text-gray-800 border-gray-400"
+            onClick={toggleMenu}
           >
-            {dropdown && (
-              <div className="absolute right-8 bg-white rounded-md py-4 px-5 w-32 top-7 shadow-lg border">
-                <ul>
-                  <Link href={"/myaccount"}>
-                    {" "}
-                    <li className="py-1 hover:text-pink-700 text-sm font-bold">
-                      MyAccount
-                    </li>
-                  </Link>
-                  <Link href={"/orders"}>
-                    {" "}
-                    <li className="py-1 hover:text-pink-700 text-sm font-bold">
-                      Orders
-                    </li>
-                  </Link>
-                  <li
-                    onClick={logout}
-                    className="py-1 hover:text-pink-700 text-sm font-bold"
-                  >
-                    Logout
-                  </li>
-                </ul>
-              </div>
-            )}
-            {user.value && <MdAccountCircle className="text-3xl mx-2" />}
-          </a>
-          {/* 
-          token asel tr he icon mnje login kel asel tr he icon */}
-
-          {!user.value && (
-            <Link href={"/login"}>
-              <button className="bg-pink-600 px-2 py-1 rounded-md text-sm text-white mx-2">
-                Login
-              </button>
-              {/* token nasel tr he icon mnje login nsel tr he button */}
-            </Link>
-          )}
-          <AiOutlineShoppingCart onClick={toggleCart} className="text-3xl" />
-        </div>
-
-        {/* cart sidebar */}
-        <div
-          ref={ref}
-          className={` w-80 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8  transition-transform ${
-            // cart length o asel tr open honar nahi automatic
-            Object.keys(cart).length !== 0
-              ? "translate-x-0"
-              : "translate-x-full"
-          } `}
-          //   cart rs 0 asel tr cart open rahnar nahi cart madhe rs astil tr cart open rahil
-        >
-          <h2 className="font-bold texl-lg text-center mt-1">Shopping Cart</h2>
-          <span
-            onClick={toggleCart}
-            className="absolute top-5 right-2 cursor-pointer text-2xl text-pink-500"
-          >
-            <AiFillCloseCircle className="cursor-pointer" />
-          </span>
-          <ol className="list-decimal font-semibold ">
-            {/* {Object.keys{cart}.length === 0 && <div> no item</div>} */}
-            {Object.keys(cart).length == 0 && (
-              <div className="my-4 font-semibold">Your Card is Empty!</div>
-            )}
-
-            {Object.keys(cart).map((k) => {
-              return (
-                <li key={k}>
-                  {/* k ha itemcode ahe */}
-
-                  <div className="item flex my-8 ">
-                    <span className="w-2/3 font-semibold">
-                      {cart[k].name}({cart[k].size}/{cart[k].variant})
+            {menuOpen ? <FaTimes size={24}   className={` ${textColor}`} /> : <FaBars size={24}  className={` ${textColor}`}  />}
+          </button>
+          <div className="hidden md:flex w-full md:w-auto md:ml-auto">
+            <ol className="flex flex-col md:flex-row justify-end items-center space-y-2 md:space-y-0 md:space-x-8 text-lg font-serif">
+              {navItems.map((item) => (
+                <li
+                  key={item.name}
+                  className={`relative group ${textColor} ${router.pathname === item.path ? 'text-red-800' : 'text-gray-800'} ${item.isSpecial ? 'bg-red-700 p-1 ' : ''} `}
+                >
+                  <Link href={item.path}>
+                    <span className={`transition-colors duration-300  ${item.isSpecial ? 'hover:text-white text-white p-2' : 'hover:text-red-800'}`}>
+                      {item.name}
                     </span>
-                    <span className="flex items-center justify-center font-semibold 1/3 texl-lg">
-                      <AiFillMinusCircle
-                        onClick={() => {
-                          removeFromCart(
-                            k,
-                            1,
-                            cart[k].price,
-                            cart[k].name,
-                            cart[k].size,
-                            cart[k].variant
-                          );
-                        }}
-                        className="cursor-pointer text-pink-500"
-                      />{" "}
-                      <span className="mx-2">{cart[k].qty}</span>
-                      <AiFillPlusCircle
-                        onClick={() => {
-                          addToCart(
-                            k,
-                            1,
-                            cart[k].price,
-                            cart[k].name,
-                            cart[k].size,
-                            cart[k].variant
-                          );
-                        }}
-                        className="cursor-pointer text-pink-500"
-                      />{" "}
-                    </span>
-                  </div>
+                  </Link>
+                  {router.pathname === item.path && (
+                    <span className="absolute left-0 -bottom-1 w-full h-1 bg-red-500 transition-all duration-300"></span>
+                  )}
                 </li>
-              );
-            })}
-          </ol>
-          <div className="font-bold my-2">SubTotal: ₹{subTotal}</div>
-          <div className="flex">
-            <Link href={"/checkout"}>
-              <button className="flex mr-2  text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded text-sm">
-                <BsFillBagCheckFill className="m-1" />
-                Checkout
-              </button>
-            </Link>
-            {/* onClick={clearCart} */}
-            <button
-              onClick={clearCart}
-              className="flex mr-2 text-white bg-pink-500 border-0 py-2 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm"
-            >
-              ClearCart
-            </button>
+              ))}
+            </ol>
           </div>
         </div>
+      </nav>
+
+      <div
+        className={`fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+        onClick={toggleMenu}
+      ></div>
+
+      <div
+        className={`fixed top-0 left-0 z-50 w-full h-full  bg-white shadow-md transform ${menuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}
+      >
+        <button
+          onClick={toggleMenu}
+          className="absolute top-4 right-4 p-2 bg-gray-200 rounded-full"
+        >
+          <FaTimes size={24} />
+        </button>
+        <div className="p-4">
+          <h2 className="text-xl font-bold">RK GROUP OF IT SOLUTION</h2>
+          <ol className="flex flex-col space-y-4 mt-4 text-lg font-serif">
+            {navItems.map((item) => (
+              <li
+                key={item.name}
+                className={`relative group ${router.pathname === item.path ? 'text-red-800' : 'text-gray-800'} ${item.isSpecial ? 'bg-red-700 p-1 ' : ''}`}
+              >
+                <Link href={item.path} onClick={toggleMenu}>
+                  <span className={`transition-colors duration-300 ${item.isSpecial ? 'hover:text-white text-white p-2' : 'hover:text-red-800'}`}>
+                    {item.name}
+                  </span>
+                </Link>
+                {router.pathname === item.path && (
+                  <span className="absolute left-0 -bottom-1 w-full h-1 bg-red-500 transition-all duration-300"></span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
